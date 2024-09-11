@@ -5,6 +5,11 @@ export default {
 
   theme: {
     extend: {
+      colors: {
+        grayBorder: "#DBDBDB",
+      },
+    },
+    extend: {
       fontFamily: {
         firaGo: ["FiraGO", "sans-serif"],
       },
