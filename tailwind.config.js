@@ -7,10 +7,9 @@ export default {
     extend: {
       colors: {
         grayBorder: "#FC4747",
-        red: "",
+        red: "#F93B1D",
       },
-    },
-    extend: {
+
       fontFamily: {
         firaGo: ["FiraGO", "sans-serif"],
       },

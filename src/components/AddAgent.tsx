@@ -1,6 +1,7 @@
 // import { useForm } from "react-hook-form";
 import AddAgentInputFields from "../components/AddAgentInputFields";
 import PlusCircle from "../assets/plus-circle.png";
+import Button from "../components/Button";
 
 const AddAgent = () => {
   return (
@@ -41,6 +42,15 @@ const AddAgent = () => {
             <div className="border border-dashed border-x-2 border-y-2 rounded-md  w-full border-[#808A93] h-[120px] flex justify-center items-center">
               <img className="w-6 cursor-pointer" src={PlusCircle} />
             </div>
+          </div>
+
+          <div className="mt-[94px] flex justify-end gap-[15px]">
+            <Button title="გაუქმება" bgColor="bg-white" textColor="text-red" />
+            <Button
+              title="დაამატე აგენტი"
+              bgColor="bg-red"
+              textColor="text-white"
+            />
           </div>
         </form>
       </div>
