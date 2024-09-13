@@ -1,5 +1,6 @@
 // import { useForm } from "react-hook-form";
 import AddAgentInputFields from "../components/AddAgentInputFields";
+import PlusCircle from "../assets/plus-circle.png";
 
 const AddAgent = () => {
   return (
@@ -19,7 +20,7 @@ const AddAgent = () => {
               validationMessage="მინიმუმ ორი სიმბოლო"
             />
           </div>
-          <div className="flex gap-[31px]">
+          <div className="flex gap-[31px] mb-7">
             <AddAgentInputFields
               labelName="ელ-ფოსტა *"
               validationMessage="გამოიყენეთ @redberry.ge ფოსტა"
@@ -28,6 +29,18 @@ const AddAgent = () => {
               labelName="ტელეფონის ნომერი"
               validationMessage="მხოლოდ რიცხვები"
             />
+          </div>
+
+          <div>
+            <label
+              className="block font-firaGo text-[14px] font-medium mb-[5px]"
+              htmlFor="image"
+            >
+              ატვირთეთ ფოტო *
+            </label>
+            <div className="border border-dashed border-x-2 border-y-2 rounded-md  w-full border-[#808A93] h-[120px] flex justify-center items-center">
+              <img className="w-6 cursor-pointer" src={PlusCircle} />
+            </div>
           </div>
         </form>
       </div>
