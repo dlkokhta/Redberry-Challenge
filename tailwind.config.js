@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        grayBorder: "#FC4747",
+        grayBorder: "#DBDBDB",
         red: "#F93B1D",
       },
 

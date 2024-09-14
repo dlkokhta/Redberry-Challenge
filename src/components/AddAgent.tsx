@@ -4,7 +4,11 @@ import PlusCircle from "../assets/plus-circle.png";
 import Button from "../components/Button";
 import axios from "axios";
 
-const AddAgent = () => {
+interface setIsAgentWindowOpenType {
+  setIsAgentWindowOpen: boolean;
+}
+
+const AddAgent = ({ setIsAgentWindowOpen }: any) => {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (data: any) => {
@@ -41,6 +45,10 @@ const AddAgent = () => {
     }
 
     reset();
+  };
+
+  const cancelHandleClick = () => {
+    setIsAgentWindowOpen(true);
   };
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75">
@@ -103,11 +111,18 @@ const AddAgent = () => {
           </div>
 
           <div className="mt-[94px] flex justify-end gap-[15px]">
-            <Button title="გაუქმება" bgColor="bg-white" textColor="text-red" />
+            <Button
+              onclick={cancelHandleClick}
+              title="გაუქმება"
+              bgColor="bg-white"
+              textColor="text-red"
+              type="button"
+            />
             <Button
               title="დაამატე აგენტი"
               bgColor="bg-red"
               textColor="text-white"
+              type="submit"
             />
           </div>
         </form>
