@@ -8,6 +8,9 @@ export default {
       colors: {
         grayBorder: "#DBDBDB",
         red: "#F93B1D",
+        textBlack: " #021526",
+        textGreen: " #45A849",
+        textRed: " #F93B1D",
       },
 
       fontFamily: {
