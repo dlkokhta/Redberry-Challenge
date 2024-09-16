@@ -1,16 +1,15 @@
 import { useForm } from "react-hook-form";
 import AddAgentInputFields from "../components/AddAgentInputFields";
-import PlusCircle from "../assets/plus-circle.png";
+import { useState } from "react";
 import Button from "../components/Button";
 import axios from "axios";
 import addAgentValidationSchema from "../schemas/addAgentValidationSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRef, useState } from "react";
-import deleteIcon from "../assets/deleteIcon.png";
+import AvatarUpload from "../components/AvatarUpload";
 
 const AddAgent = ({ setIsAgentWindowOpen }: any) => {
   const [required, setRequired] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -88,23 +87,6 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
     setRequired(true);
   };
 
-  const [imagePreview, setImagePreview] = useState("");
-
-  const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setImagePreview(imageUrl); // Show the preview
-      setValue("avatar", file); // Set the avatar in the form
-      clearErrors("avatar"); // Clear validation error if present
-    }
-  };
-  const deleteAvatarHandleClick = () => {
-    setImagePreview("");
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
-  };
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75">
       <div className=" bg-white py-[87px] px-[105px]">
@@ -242,54 +224,13 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
             </div>
           </div>
 
-          <div>
-            <label
-              className="block font-firaGo text-[14px] font-medium mb-[5px]"
-              htmlFor="avatar"
-            >
-              ატვირთეთ ფოტო *
-            </label>
+          <AvatarUpload
+            setValue={setValue}
+            clearErrors={clearErrors}
+            errors={errors}
+            register={register}
+          />
 
-            <div
-              className={`relative border border-dashed border-x-2 border-y-2 rounded-md  w-full ${
-                errors.avatar ? "border-textRed" : "border-[#808A93]"
-              }  h-[120px] flex justify-center items-center
-                `}
-            >
-              {imagePreview ? (
-                <div className="relative">
-                  <img
-                    src={imagePreview}
-                    alt="Uploaded Preview"
-                    className="w-[92px] h-[82px] object-cover rounded-md"
-                  />
-                  <img
-                    className="w-6 cursor-pointer absolute ml-[75px] -mt-[19px]"
-                    src={deleteIcon}
-                    alt="Upload"
-                    onClick={deleteAvatarHandleClick}
-                  />
-                </div>
-              ) : (
-                <img className="w-6 " src={PlusCircle} alt="Upload" />
-              )}
-              <input
-                type="file"
-                id="avatar"
-                {...register("avatar")}
-                name="avatar"
-                className="absolute inset-0 opacity-0  cursor-pointer ml-[385px] mt-[46px]"
-                onChange={onImageChange}
-                ref={fileInputRef}
-                style={{ width: "24px", height: "24px" }}
-              />
-            </div>
-          </div>
-          {errors.avatar && (
-            <p className="font-firaGo text-[14px] font-normal text-textRed absolute">
-              {errors.avatar.message}
-            </p>
-          )}
           <div className="mt-[94px] flex justify-end gap-[15px]">
             <Button
               onclick={cancelHandleClick}
