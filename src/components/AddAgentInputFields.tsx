@@ -6,6 +6,8 @@ interface AddAgentInputFieldsTypes {
   errors: any;
   watchValue: string;
   required: boolean;
+  width: string;
+  hight: string;
 }
 
 const AddAgentInputFields: React.FC<AddAgentInputFieldsTypes> = ({
@@ -16,6 +18,8 @@ const AddAgentInputFields: React.FC<AddAgentInputFieldsTypes> = ({
   errors,
   watchValue,
   required,
+  width,
+  hight,
 }) => {
   const getStrokeColor = () => {
     if (!required && (watchValue === undefined || watchValue === "")) {
@@ -36,7 +40,7 @@ const AddAgentInputFields: React.FC<AddAgentInputFieldsTypes> = ({
         {label}
       </label>
       <input
-        className={`border border-[#808A93] rounded-[6px] w-[384px] h-[42px] outline-none pl-2 ${
+        className={`border border-[#938085] rounded-[6px] ${width} ${hight} outline-none pl-2 ${
           !required && (watchValue === undefined || watchValue === "")
             ? " border-textBlack"
             : errors

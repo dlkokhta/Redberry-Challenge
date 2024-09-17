@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Button from "../components/Button";
-// import AvatarUpload from "../components/AvatarUpload";
+import AvatarUpload from "../components/AvatarUpload";
 
 const AddListingPage = () => {
   const [required, setRequired] = useState(false);
@@ -14,12 +14,15 @@ const AddListingPage = () => {
     formState: { errors },
     reset,
     watch,
-    // clearErrors,
-    // setValue,
+    clearErrors,
+    setValue,
   } = useForm();
 
   const address = watch("address");
   const postalCode = watch("postalCode");
+  const price = watch("price");
+  const area = watch("area");
+  const bedrooms = watch("bedrooms");
 
   const onSubmit = async (data: any) => {
     const formData = new FormData();
@@ -63,7 +66,7 @@ const AddListingPage = () => {
 
       <form encType="multipart/form-data" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-[80px]">
-          <h2 className=" font-firaGo font-medium text-lg">გარიგების ტიპი</h2>
+          <h2 className=" font-firaGo font-bold text-lg">გარიგების ტიპი</h2>
           <div className="font-firaGo text-[14px] font-normal flex">
             <label className="mr-[84px] flex items-center">
               <input
@@ -86,7 +89,7 @@ const AddListingPage = () => {
             </label>
           </div>
         </div>
-        <h2 className=" font-firaGo font-medium text-lg mb-[22px]">
+        <h2 className=" font-firaGo font-bold1 text-lg mb-[22px]">
           მდებარეობა
         </h2>
         <div className="flex justify-between mb-[28px]">
@@ -98,6 +101,8 @@ const AddListingPage = () => {
             errors={errors.address}
             watchValue={address}
             required={required}
+            width="w-[384px]"
+            hight=" h-[42px]"
           />
 
           <AddAgentInputFields
@@ -108,14 +113,117 @@ const AddListingPage = () => {
             errors={errors.postalCode}
             watchValue={postalCode}
             required={required}
+            width="w-[384px]"
+            hight=" h-[42px]"
           />
         </div>
 
-        {/* <select id="options" name="options" className="border">
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select> */}
+        <div className="flex justify-between">
+          <select
+            id="options"
+            name="options"
+            className=" border border-[#808A93] rounded-[6px] w-[384px] h-[42px] outline-none "
+          >
+            <option value="option1">კახეთი</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+          </select>
+
+          <select
+            id="options"
+            name="options"
+            className=" border border-[#808A93] rounded-[6px] w-[384px] h-[42px] outline-none "
+          >
+            <option value="option1">თელავი</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+          </select>
+        </div>
+
+        <h2 className=" font-firaGo font-bold text-lg mb-[22px] mt-[101px]">
+          ბინის დეტალები
+        </h2>
+
+        <div className="flex justify-between mb-[20px]">
+          <AddAgentInputFields
+            label="ფასი"
+            validationMessage="მხოლოდ რიცხვები"
+            id="price"
+            register={register}
+            errors={errors.price}
+            watchValue={price}
+            required={required}
+            width="w-[384px]"
+            hight=" h-[42px]"
+          />
+
+          <AddAgentInputFields
+            label="ფართობი"
+            validationMessage="მხოლოდ რიცხვები"
+            id="area"
+            register={register}
+            errors={errors.area}
+            watchValue={area}
+            required={required}
+            width="w-[384px]"
+            hight=" h-[42px]"
+          />
+        </div>
+
+        <div className="mb-[20px]">
+          <AddAgentInputFields
+            label="საძინებლების რაოდენობა"
+            validationMessage="მხოლოდ რიცხვები"
+            id="bedrooms"
+            register={register}
+            errors={errors.bedrooms}
+            watchValue={bedrooms}
+            required={required}
+            width="w-[384px]"
+            hight=" h-[42px]"
+          />
+        </div>
+
+        <div className="mb-[20px]">
+          <AddAgentInputFields
+            label="აღწერა *"
+            validationMessage="მხოლოდ რიცხვები"
+            id="bedrooms"
+            register={register}
+            errors={errors.bedrooms}
+            watchValue={bedrooms}
+            required={required}
+            width="w-full"
+            hight="h-[135px]"
+          />
+        </div>
+
+        <AvatarUpload
+          setValue={setValue}
+          clearErrors={clearErrors}
+          errors={errors}
+          register={register}
+          id="avatar"
+        />
+
+        <div className=" mt-[80px]">
+          <h2 className=" font-firaGo font-bold text-lg mb-[22px]">აგენტი</h2>
+          <label
+            className="block font-firaGo text-[14px] font-medium mb-[5px]"
+            htmlFor={""}
+          >
+            აირჩიე
+          </label>
+          <select
+            id="options"
+            name="options"
+            className=" border border-[#808A93] rounded-[6px] w-[384px] h-[42px] outline-none "
+          >
+            <option value="option1">დიმიტრი</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+          </select>
+        </div>
 
         <div className="mt-[94px] flex justify-end gap-[15px]">
           <Button

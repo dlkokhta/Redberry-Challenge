@@ -81,6 +81,8 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
               errors={errors.name}
               watchValue={name}
               required={required}
+              width="w-[384px]"
+              hight=" h-[42px]"
             />
             <AddAgentInputFields
               label="გვარი"
@@ -90,6 +92,8 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
               errors={errors.surname}
               watchValue={surname}
               required={required}
+              width="w-[384px]"
+              hight=" h-[42px]"
             />
           </div>
           <div className="flex gap-[31px] mb-7">
@@ -101,6 +105,8 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
               errors={errors.email}
               watchValue={email}
               required={required}
+              width="w-[384px]"
+              hight=" h-[42px]"
             />
 
             <AddAgentInputFields
@@ -111,6 +117,8 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
               errors={errors.phone}
               watchValue={phone}
               required={required}
+              width="w-[384px]"
+              hight=" h-[42px]"
             />
           </div>
 

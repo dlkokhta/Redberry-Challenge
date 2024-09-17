@@ -19,8 +19,8 @@ export default {
 
       fontWeight: {
         normal: 400,
-        medium: 500,
-        bold: 700,
+        medium1: 500,
+        bold1: 700,
       },
     },
 
