@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         firaGo: ["FiraGO", "sans-serif"],
       },
+
       fontWeight: {
         normal: 400,
         medium: 500,
