@@ -19,6 +19,7 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
     clearErrors,
     setValue,
   } = useForm({
+    mode: "onChange",
     resolver: yupResolver(addAgentValidationSchema),
   });
 
@@ -34,13 +35,11 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
     formData.append("surname", data.surname);
     formData.append("email", data.email);
     formData.append("phone", data.phone);
-    formData.append("avatar", data.avatar[0]);
+    formData.append("avatar", data.avatar);
 
     const url =
       "https://api.real-estate-manager.redberryinternship.ge/api/agents/";
-    // const token = "9cfc36ff-e2fb-41a1-95c0-55773a2ca25f";
-    // console.log(token);
-    const token = "123";
+    const token = "9cfc36ff-e2fb-41a1-95c0-55773a2ca25f";
 
     try {
       const response = await axios.post(url, formData, {
@@ -55,6 +54,7 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
     }
 
     reset();
+    setIsAgentWindowOpen(true);
   };
 
   const cancelHandleClick = () => {
@@ -64,22 +64,20 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
   const getEmailStrokeColor = () => {
     if (!required && (email === undefined || email === "")) {
       return "#021526";
-    } else if (email.match(/^[a-zA-Z0-9._%+-]+@redberry\.ge$/)) {
-      return "#45A849";
-    } else {
+    } else if (errors.email) {
       return "#F93B1D";
+    } else {
+      return "#45A849";
     }
   };
 
   const getPhoneStrokeColor = () => {
-    const phoneValidationRegex = /^5\d{8}$/;
-
     if (!required && (phone === undefined || phone === "")) {
       return "#021526";
-    } else if (phone.match(phoneValidationRegex)) {
-      return "#45A849";
-    } else {
+    } else if (errors.phone) {
       return "#F93B1D";
+    } else {
+      return "#45A849";
     }
   };
 
@@ -100,7 +98,7 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
               validationMessage="მინიმუმ ორი სიმბოლო"
               id="name"
               register={register}
-              errors={errors.name?.message}
+              errors={errors.name}
               watchValue={name}
               required={required}
             />
@@ -109,7 +107,7 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
               validationMessage="მინიმუმ ორი სიმბოლო"
               id="surname"
               register={register}
-              errors={errors.surname?.message}
+              errors={errors.surname}
               watchValue={surname}
               required={required}
             />
@@ -126,9 +124,9 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
                 className={`border border-[#808A93] rounded-[6px] w-[384px] h-[42px] outline-none pl-2 ${
                   !required && (email === undefined || email === "")
                     ? "border-textBlack"
-                    : email && email.match(/^[a-zA-Z0-9._%+-]+@redberry\.ge$/)
-                    ? " border-textGreen"
-                    : " border-textRed"
+                    : errors.email
+                    ? " border-textRed"
+                    : " border-textGreen"
                 }`}
                 type="text"
                 id="email"
@@ -159,9 +157,9 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
                   className={`block font-firaGo text-[14px] font-normal ${
                     !required && (email === undefined || email === "")
                       ? "text-textBlack"
-                      : email && email.match(/^[a-zA-Z0-9._%+-]+@redberry\.ge$/)
-                      ? " text-textGreen"
-                      : " text-textRed"
+                      : errors.email
+                      ? " text-textRed"
+                      : " text-textGreen"
                   }`}
                 >
                   გამოიყენეთ @redberry.ge ფოსტა
@@ -180,9 +178,9 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
                 className={`border border-[#808A93] rounded-[6px] w-[384px] h-[42px] outline-none pl-2  ${
                   !required && (phone === undefined || phone === "")
                     ? "border-textBlack"
-                    : phone.match(/^5\d{8}$/)
-                    ? "border-textGreen"
-                    : "border-textRed"
+                    : errors.phone
+                    ? " border-textRed"
+                    : " border-textGreen"
                 }`}
                 type="text"
                 id="phone"
@@ -213,9 +211,9 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
                   className={`block font-firaGo text-[14px] font-normal ${
                     !required && (phone === undefined || phone === "")
                       ? "text-textBlack"
-                      : phone.match(/^5\d{8}$/)
-                      ? "text-textGreen"
-                      : "text-textRed"
+                      : errors.phone
+                      ? " text-textRed"
+                      : " text-textGreen"
                   }`}
                 >
                   მხოლოდ რიცხვები
@@ -229,6 +227,7 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
             clearErrors={clearErrors}
             errors={errors}
             register={register}
+            id="avatar"
           />
 
           <div className="mt-[94px] flex justify-end gap-[15px]">

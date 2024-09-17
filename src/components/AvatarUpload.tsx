@@ -7,6 +7,7 @@ interface AvatarUploadTypes {
   clearErrors: any;
   errors: any;
   register: any;
+  id: string;
 }
 
 const AvatarUpload: React.FC<AvatarUploadTypes> = ({
@@ -14,9 +15,10 @@ const AvatarUpload: React.FC<AvatarUploadTypes> = ({
   clearErrors,
   errors,
   register,
+  id,
 }) => {
   const [imagePreview, setImagePreview] = useState("");
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | "">("");
 
   const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -57,7 +59,7 @@ const AvatarUpload: React.FC<AvatarUploadTypes> = ({
               className="w-[92px] h-[82px] object-cover rounded-md"
             />
             <img
-              className="w-6 cursor-pointer absolute ml-[75px] -mt-[19px]"
+              className="w-6 cursor-pointer absolute ml-[75px] -mt-[19px] z-50"
               src={deleteIcon}
               alt="Upload"
               onClick={deleteAvatarHandleClick}
@@ -69,12 +71,11 @@ const AvatarUpload: React.FC<AvatarUploadTypes> = ({
         <input
           type="file"
           id="avatar"
-          {...register("avatar")}
+          {...register(id)}
           name="avatar"
-          className="absolute inset-0 opacity-0  cursor-pointer ml-[385px] mt-[46px]"
+          className="absolute inset-0 opacity-0  cursor-pointer "
           onChange={onImageChange}
           ref={fileInputRef}
-          style={{ width: "24px", height: "24px" }}
         />
       </div>
       {errors.avatar && (

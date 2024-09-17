@@ -13,17 +13,17 @@ const AddAgentInputFields: React.FC<AddAgentInputFieldsTypes> = ({
   id,
   register,
   validationMessage,
-
+  errors,
   watchValue,
   required,
 }) => {
   const getStrokeColor = () => {
     if (!required && (watchValue === undefined || watchValue === "")) {
       return "#021526";
-    } else if (watchValue.length >= 2) {
-      return "#45A849";
-    } else {
+    } else if (errors) {
       return "#F93B1D";
+    } else {
+      return "#45A849";
     }
   };
 
@@ -39,9 +39,9 @@ const AddAgentInputFields: React.FC<AddAgentInputFieldsTypes> = ({
         className={`border border-[#808A93] rounded-[6px] w-[384px] h-[42px] outline-none pl-2 ${
           !required && (watchValue === undefined || watchValue === "")
             ? " border-textBlack"
-            : watchValue && watchValue.length >= 2
-            ? " border-textGreen"
-            : " border-textRed"
+            : errors
+            ? " border-textRed"
+            : " border-textGreen"
         }`}
         type="text"
         id={id}
@@ -72,9 +72,9 @@ const AddAgentInputFields: React.FC<AddAgentInputFieldsTypes> = ({
           className={`block font-firaGo text-[14px] font-normal ${
             !required && (watchValue === undefined || watchValue === "")
               ? " text-textBlack"
-              : watchValue && watchValue.length >= 2
-              ? " text-textGreen"
-              : " text-textRed"
+              : errors
+              ? " text-textRed"
+              : " text-textGreen"
           }`}
         >
           {validationMessage}

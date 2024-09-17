@@ -1,4 +1,4 @@
-import Logo from "../assets/LOGO.png";
+import Logo from "../assets/Logo.png";
 const Header = () => {
   return (
     <header className=" h-[100px] py-[38px] pl-[162px] border border-grayBorder">
