@@ -61,26 +61,6 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
     setIsAgentWindowOpen(true);
   };
 
-  const getEmailStrokeColor = () => {
-    if (!required && (email === undefined || email === "")) {
-      return "#021526";
-    } else if (errors.email) {
-      return "#F93B1D";
-    } else {
-      return "#45A849";
-    }
-  };
-
-  const getPhoneStrokeColor = () => {
-    if (!required && (phone === undefined || phone === "")) {
-      return "#021526";
-    } else if (errors.phone) {
-      return "#F93B1D";
-    } else {
-      return "#45A849";
-    }
-  };
-
   const submitCLickhandler = () => {
     setRequired(true);
   };
@@ -113,113 +93,25 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
             />
           </div>
           <div className="flex gap-[31px] mb-7">
-            <div>
-              <label
-                className="block font-firaGo text-[14px] font-medium mb-[5px]"
-                htmlFor="email"
-              >
-                ელ-ფოსტა
-              </label>
-              <input
-                className={`border border-[#808A93] rounded-[6px] w-[384px] h-[42px] outline-none pl-2 ${
-                  !required && (email === undefined || email === "")
-                    ? "border-textBlack"
-                    : errors.email
-                    ? " border-textRed"
-                    : " border-textGreen"
-                }`}
-                type="text"
-                id="email"
-                {...register("email")}
-                name="email"
-              />
+            <AddAgentInputFields
+              label="ელ-ფოსტა"
+              validationMessage="გამოიყენეთ @redberry.ge ფოსტა"
+              id="email"
+              register={register}
+              errors={errors.email}
+              watchValue={email}
+              required={required}
+            />
 
-              <div className="flex gap-1 place-items-center mt-1">
-                <div>
-                  <svg
-                    width="12"
-                    height="11"
-                    viewBox="0 0 12 11"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M11 1.40918L4.125 9.591L1 5.87199"
-                      stroke={getEmailStrokeColor()}
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-
-                <h3
-                  className={`block font-firaGo text-[14px] font-normal ${
-                    !required && (email === undefined || email === "")
-                      ? "text-textBlack"
-                      : errors.email
-                      ? " text-textRed"
-                      : " text-textGreen"
-                  }`}
-                >
-                  გამოიყენეთ @redberry.ge ფოსტა
-                </h3>
-              </div>
-            </div>
-
-            <div>
-              <label
-                className="block font-firaGo text-[14px] font-medium mb-[5px]"
-                htmlFor="phone"
-              >
-                ტელეფონის ნომერი
-              </label>
-              <input
-                className={`border border-[#808A93] rounded-[6px] w-[384px] h-[42px] outline-none pl-2  ${
-                  !required && (phone === undefined || phone === "")
-                    ? "border-textBlack"
-                    : errors.phone
-                    ? " border-textRed"
-                    : " border-textGreen"
-                }`}
-                type="text"
-                id="phone"
-                {...register("phone")}
-                name="phone"
-              />
-
-              <div className="flex gap-1 place-items-center mt-1">
-                <div>
-                  <svg
-                    width="12"
-                    height="11"
-                    viewBox="0 0 12 11"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M11 1.40918L4.125 9.591L1 5.87199"
-                      stroke={getPhoneStrokeColor()}
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-
-                <h3
-                  className={`block font-firaGo text-[14px] font-normal ${
-                    !required && (phone === undefined || phone === "")
-                      ? "text-textBlack"
-                      : errors.phone
-                      ? " text-textRed"
-                      : " text-textGreen"
-                  }`}
-                >
-                  მხოლოდ რიცხვები
-                </h3>
-              </div>
-            </div>
+            <AddAgentInputFields
+              label="ტელეფონის ნომერი"
+              validationMessage="მხოლოდ რიცხვები"
+              id="phone"
+              register={register}
+              errors={errors.phone}
+              watchValue={phone}
+              required={required}
+            />
           </div>
 
           <AvatarUpload
