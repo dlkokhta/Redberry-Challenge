@@ -8,13 +8,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import addListingValidationSchema from "../schemas/addListingValidationSchema";
 import { RootState } from "../store/store.js";
 import { useSelector } from "react-redux";
+import AddListingDropDown from "../components/AddListingDropDown.js";
 
 const AddListingPage = () => {
-  const region = useSelector((state: RootState) => state.region.region);
-  console.log(
-    "regiooooon",
-    region.map((item: any) => item.name)
-  );
+  const regions = useSelector((state: RootState) => state.region.region);
+  const cities = useSelector((state: RootState) => state.cities.cities);
 
   const [required, setRequired] = useState(false);
 
@@ -143,35 +141,8 @@ const AddListingPage = () => {
         </div>
 
         <div className="flex justify-between">
-          <div>
-            <h3 className="block font-firaGo text-[14px] font-medium mb-[5px]">
-              რეგიონი
-            </h3>
-            <select
-              id="regionId"
-              name="regionId"
-              className=" border border-[#808A93] rounded-[6px] w-[384px] h-[42px] outline-none "
-            >
-              <option value="option1">1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
-            </select>
-          </div>
-
-          <div>
-            <h3 className="block font-firaGo text-[14px] font-medium mb-[5px]">
-              ქალაქი
-            </h3>
-            <select
-              id="cityId"
-              name="cityId"
-              className=" border border-[#808A93] rounded-[6px] w-[384px] h-[42px] outline-none "
-            >
-              <option value="option1">2</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
-            </select>
-          </div>
+          <AddListingDropDown data={regions} header="რეგიონი" />
+          <AddListingDropDown data={cities} header="ქალაქი" />
         </div>
 
         <h2 className=" font-firaGo font-bold text-lg mb-[22px] mt-[101px]">

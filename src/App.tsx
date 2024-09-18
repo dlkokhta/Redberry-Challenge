@@ -6,6 +6,7 @@ import AddListingPage from "./pages/AddListingPage";
 import axios from "axios";
 import { useEffect } from "react";
 import { setRegion } from "./store/regionsSlice";
+import { setCities } from "./store/citiesSlice";
 import { useDispatch } from "react-redux";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       try {
         const response = await axios.get(`${regionsUrl}`);
         dispatch(setRegion(response.data));
+        console.log("region", response.data);
       } catch (error) {
         console.log(error);
       }
@@ -26,18 +28,18 @@ function App() {
   }, []);
 
   const citiesUrl =
-    "https://api.real-estate-manager.redberryinternship.ge/api/regions/";
+    "https://api.real-estate-manager.redberryinternship.ge/api/cities/";
 
   useEffect(() => {
-    const fetchregions = async () => {
+    const fetchCities = async () => {
       try {
         const response = await axios.get(`${citiesUrl}`);
-        dispatch(setRegion(response.data));
+        dispatch(setCities(response.data));
       } catch (error) {
         console.log(error);
       }
     };
-    fetchregions();
+    fetchCities();
   }, []);
 
   return (
