@@ -13,8 +13,10 @@ import AddListingDropDown from "../components/AddListingDropDown.js";
 const AddListingPage = () => {
   const regions = useSelector((state: RootState) => state.region.region);
   const cities = useSelector((state: RootState) => state.cities.cities);
+  const agents = useSelector((state: RootState) => state.agents.agents);
 
   const [required, setRequired] = useState(false);
+  const [selectedRegion, setSelectedRegion] = useState<any>(null);
 
   const {
     register,
@@ -78,6 +80,10 @@ const AddListingPage = () => {
     setRequired(true);
   };
 
+  const handleRegionSelect = (region: any) => {
+    setSelectedRegion(region);
+  };
+
   return (
     <div className="pt-[62px] px-[562px] pb-[87px]">
       <h1 className="text-center font-firaGo text-[32px] font-medium mb-[61px]">
@@ -129,7 +135,7 @@ const AddListingPage = () => {
 
           <AddAgentInputFields
             label="საფოსტო ინდექსი *"
-            validationMessage="მინიმუმ ორი სიმბოლო"
+            validationMessage="მხოლოდ რიცხვები"
             id="postalCode"
             register={register}
             errors={errors.postalCode}
@@ -141,8 +147,20 @@ const AddListingPage = () => {
         </div>
 
         <div className="flex justify-between">
-          <AddListingDropDown data={regions} header="რეგიონი" />
-          <AddListingDropDown data={cities} header="ქალაქი" />
+          <AddListingDropDown
+            data={regions}
+            header="რეგიონი"
+            placeholder="აირჩიე რეგიონი"
+            onSelect={handleRegionSelect}
+          />
+
+          {selectedRegion && (
+            <AddListingDropDown
+              data={cities}
+              header="ქალაქი"
+              placeholder="აირჩიე ქალაქი"
+            />
+          )}
         </div>
 
         <h2 className=" font-firaGo font-bold text-lg mb-[22px] mt-[101px]">
@@ -192,7 +210,7 @@ const AddListingPage = () => {
         <div className="mb-[20px]">
           <AddAgentInputFields
             label="აღწერა *"
-            validationMessage="მხოლოდ რიცხვები"
+            validationMessage="მინიმუმ ხუთი სიტყვა"
             id="description"
             register={register}
             errors={errors.description}
@@ -212,19 +230,11 @@ const AddListingPage = () => {
         />
 
         <div className=" mt-[80px]">
-          <h2 className=" font-firaGo font-bold text-lg mb-[22px]">აგენტი</h2>
-          <label className="block font-firaGo text-[14px] font-medium mb-[5px]">
-            აირჩიე
-          </label>
-          <select
-            id="options"
-            name="options"
-            className=" border border-[#808A93] rounded-[6px] w-[384px] h-[42px] outline-none "
-          >
-            <option value="option1">219</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-          </select>
+          <AddListingDropDown
+            data={agents}
+            header="აირჩიე"
+            placeholder="აირჩიე აგენტი"
+          />
         </div>
 
         <div className="mt-[94px] flex justify-end gap-[15px]">

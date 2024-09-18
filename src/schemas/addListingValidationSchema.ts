@@ -14,13 +14,41 @@ const addListingValidationSchema = yup.object({
       }
     ),
 
-  regionId: yup.number().required(),
-  description: yup.string().required(),
+  description: yup
+    .string()
+    .required("Description is required")
+    .test(
+      "min-words",
+      "Description must contain at least 5 words.",
+      function (value) {
+        if (!value) return false;
+
+        const wordCount = value.trim().split(/\s+/).length;
+        return wordCount >= 5;
+      }
+    ),
+
   cityId: yup.number().required(),
-  postalCode: yup.string().required(),
-  price: yup.number().required(),
-  area: yup.number().required(),
-  bedrooms: yup.number().required(),
+  postalCode: yup.string().required("Postal code is required").matches(/^\d+$/),
+
+  price: yup
+    .number()
+    .typeError("Price must be a number")
+    .required("Price is required")
+    .positive("Price must be a positive number")
+    .integer("Price must be an integer"),
+  area: yup
+    .number()
+    .typeError("Price must be a number")
+    .required("Price is required")
+    .positive("Price must be a positive number")
+    .integer("Price must be an integer"),
+  bedrooms: yup
+    .number()
+    .typeError("Price must be a number")
+    .required("Price is required")
+    .positive("Price must be a positive number")
+    .integer("Price must be an integer"),
   isRental: yup.number().required(),
   agentID: yup.number().required(),
 });
