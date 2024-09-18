@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { setRegion } from "./store/regionsSlice";
 import { setCities } from "./store/citiesSlice";
 import { useDispatch } from "react-redux";
+import { setAgents } from "./store/agentSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +41,27 @@ function App() {
       }
     };
     fetchCities();
+  }, []);
+
+  const agentsUrl =
+    "https://api.real-estate-manager.redberryinternship.ge/api/agents/";
+  const token = "9cfc36ff-e2fb-41a1-95c0-55773a2ca25f";
+
+  useEffect(() => {
+    const fetchAgents = async () => {
+      try {
+        const response = await axios.get(`${agentsUrl}`, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        dispatch(setAgents(response.data));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAgents();
   }, []);
 
   return (
