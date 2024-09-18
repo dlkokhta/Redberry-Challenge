@@ -4,7 +4,7 @@ interface AddAgentInputFieldsTypes {
   register: any;
   validationMessage: string;
   errors: any;
-  watchValue: string;
+  watchValue: any;
   required: boolean;
   width: string;
   hight: string;

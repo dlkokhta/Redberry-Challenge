@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Button from "../components/Button";
 import AvatarUpload from "../components/AvatarUpload";
+import { yupResolver } from "@hookform/resolvers/yup";
+import addListingValidationSchema from "../schemas/addListingValidationSchema";
 
 const AddListingPage = () => {
   const [required, setRequired] = useState(false);
@@ -16,25 +18,37 @@ const AddListingPage = () => {
     watch,
     clearErrors,
     setValue,
-  } = useForm();
+  } = useForm({
+    mode: "onChange",
+    resolver: yupResolver(addListingValidationSchema),
+  });
 
   const address = watch("address");
   const postalCode = watch("postalCode");
   const price = watch("price");
   const area = watch("area");
   const bedrooms = watch("bedrooms");
+  const description = watch("description");
 
   const onSubmit = async (data: any) => {
+    console.log("errorsss!!", errors);
+    console.log("data!!", data);
     const formData = new FormData();
-    console.log("data", data);
-    formData.append("name", data.name);
-    formData.append("surname", data.surname);
-    formData.append("email", data.email);
-    formData.append("phone", data.phone);
-    formData.append("avatar", data.avatar);
+
+    formData.append("address", data.address);
+    formData.append("image", data.avatar);
+    formData.append("region_id", data.regionId);
+    formData.append("description", data.description);
+    formData.append("city_id", data.cityId);
+    formData.append("zip_code", data.postalCode);
+    formData.append("price", data.price);
+    formData.append("area", data.area);
+    formData.append("bedrooms", data.bedrooms);
+    formData.append("is_rental", data.isRental);
+    formData.append("agent_id", data.agentID);
 
     const url =
-      "https://api.real-estate-manager.redberryinternship.ge/api/real-estates/";
+      "https://api.real-estate-manager.redberryinternship.ge/api/real-estates12/";
     const token = "9cfc36ff-e2fb-41a1-95c0-55773a2ca25f";
 
     try {
@@ -71,18 +85,20 @@ const AddListingPage = () => {
             <label className="mr-[84px] flex items-center">
               <input
                 type="radio"
-                name="ratio"
-                value="option1"
-                checked
+                id="forSale"
+                value="1"
+                {...register("isRental")}
                 className="mr-[7px] w-[17px] h-[17px] "
+                defaultChecked
               />
               იყიდება
             </label>
             <label className=" flex items-center">
               <input
                 type="radio"
-                name="ratio"
-                value="option2"
+                id="forRent"
+                value="0"
+                {...register("isRental")}
                 className="mr-[7px] w-[17px] h-[17px] "
               />
               ქირავდება
@@ -119,25 +135,35 @@ const AddListingPage = () => {
         </div>
 
         <div className="flex justify-between">
-          <select
-            id="options"
-            name="options"
-            className=" border border-[#808A93] rounded-[6px] w-[384px] h-[42px] outline-none "
-          >
-            <option value="option1">კახეთი</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-          </select>
+          <div>
+            <h3 className="block font-firaGo text-[14px] font-medium mb-[5px]">
+              რეგიონი
+            </h3>
+            <select
+              id="regionId"
+              name="regionId"
+              className=" border border-[#808A93] rounded-[6px] w-[384px] h-[42px] outline-none "
+            >
+              <option value="option1">1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+            </select>
+          </div>
 
-          <select
-            id="options"
-            name="options"
-            className=" border border-[#808A93] rounded-[6px] w-[384px] h-[42px] outline-none "
-          >
-            <option value="option1">თელავი</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-          </select>
+          <div>
+            <h3 className="block font-firaGo text-[14px] font-medium mb-[5px]">
+              ქალაქი
+            </h3>
+            <select
+              id="cityId"
+              name="cityId"
+              className=" border border-[#808A93] rounded-[6px] w-[384px] h-[42px] outline-none "
+            >
+              <option value="option1">2</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+            </select>
+          </div>
         </div>
 
         <h2 className=" font-firaGo font-bold text-lg mb-[22px] mt-[101px]">
@@ -188,10 +214,10 @@ const AddListingPage = () => {
           <AddAgentInputFields
             label="აღწერა *"
             validationMessage="მხოლოდ რიცხვები"
-            id="bedrooms"
+            id="description"
             register={register}
-            errors={errors.bedrooms}
-            watchValue={bedrooms}
+            errors={errors.description}
+            watchValue={description}
             required={required}
             width="w-full"
             hight="h-[135px]"
@@ -208,10 +234,7 @@ const AddListingPage = () => {
 
         <div className=" mt-[80px]">
           <h2 className=" font-firaGo font-bold text-lg mb-[22px]">აგენტი</h2>
-          <label
-            className="block font-firaGo text-[14px] font-medium mb-[5px]"
-            htmlFor={""}
-          >
+          <label className="block font-firaGo text-[14px] font-medium mb-[5px]">
             აირჩიე
           </label>
           <select
@@ -219,7 +242,7 @@ const AddListingPage = () => {
             name="options"
             className=" border border-[#808A93] rounded-[6px] w-[384px] h-[42px] outline-none "
           >
-            <option value="option1">დიმიტრი</option>
+            <option value="option1">219</option>
             <option value="option2">Option 2</option>
             <option value="option3">Option 3</option>
           </select>
