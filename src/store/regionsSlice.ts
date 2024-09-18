@@ -3,7 +3,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface types {
   id: any;
   name: string;
-  regionId: number;
 }
 
 interface regionTypes {

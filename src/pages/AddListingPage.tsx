@@ -6,8 +6,16 @@ import Button from "../components/Button";
 import AvatarUpload from "../components/AvatarUpload";
 import { yupResolver } from "@hookform/resolvers/yup";
 import addListingValidationSchema from "../schemas/addListingValidationSchema";
+import { RootState } from "../store/store.js";
+import { useSelector } from "react-redux";
 
 const AddListingPage = () => {
+  const region = useSelector((state: RootState) => state.region.region);
+  console.log(
+    "regiooooon",
+    region.map((item: any) => item.name)
+  );
+
   const [required, setRequired] = useState(false);
 
   const {

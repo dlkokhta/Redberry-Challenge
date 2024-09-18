@@ -10,19 +10,34 @@ import { useDispatch } from "react-redux";
 
 function App() {
   const dispatch = useDispatch();
-  const url =
-    "https://api.real-estate-manager.redberryinternship.ge/api/cities/";
+  const regionsUrl =
+    "https://api.real-estate-manager.redberryinternship.ge/api/regions/";
 
   useEffect(() => {
-    const fetchCities = async () => {
+    const fetchregions = async () => {
       try {
-        const response = await axios.get(`${url}`);
+        const response = await axios.get(`${regionsUrl}`);
         dispatch(setRegion(response.data));
       } catch (error) {
         console.log(error);
       }
     };
-    fetchCities();
+    fetchregions();
+  }, []);
+
+  const citiesUrl =
+    "https://api.real-estate-manager.redberryinternship.ge/api/regions/";
+
+  useEffect(() => {
+    const fetchregions = async () => {
+      try {
+        const response = await axios.get(`${citiesUrl}`);
+        dispatch(setRegion(response.data));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchregions();
   }, []);
 
   return (
