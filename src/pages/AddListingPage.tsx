@@ -9,6 +9,7 @@ import addListingValidationSchema from "../schemas/addListingValidationSchema";
 import { RootState } from "../store/store.js";
 import { useSelector } from "react-redux";
 import AddListingDropDown from "../components/AddListingDropDown.js";
+import { useNavigate } from "react-router-dom";
 
 const AddListingPage = () => {
   const regions = useSelector((state: RootState) => state.region.region);
@@ -38,6 +39,8 @@ const AddListingPage = () => {
   const bedrooms = watch("bedrooms");
   const description = watch("description");
 
+  const navigate = useNavigate();
+
   const onSubmit = async (data: any) => {
     console.log("errorsss!!", errors);
     console.log("data!!", data);
@@ -56,7 +59,7 @@ const AddListingPage = () => {
     formData.append("agent_id", data.agentID);
 
     const url =
-      "https://api.real-estate-manager.redberryinternship.ge/api/real-estates12/";
+      "https://api.real-estate-manager.redberryinternship.ge/api/real-estates/";
     const token = "9cfc36ff-e2fb-41a1-95c0-55773a2ca25f";
 
     try {
@@ -72,6 +75,7 @@ const AddListingPage = () => {
     }
 
     reset();
+    navigate("/");
   };
 
   const cancelHandleClick = () => {};
@@ -98,7 +102,7 @@ const AddListingPage = () => {
               <input
                 type="radio"
                 id="forSale"
-                value="1"
+                value="0"
                 {...register("isRental")}
                 className="mr-[7px] w-[17px] h-[17px] "
                 defaultChecked
@@ -109,7 +113,7 @@ const AddListingPage = () => {
               <input
                 type="radio"
                 id="forRent"
-                value="0"
+                value="1"
                 {...register("isRental")}
                 className="mr-[7px] w-[17px] h-[17px] "
               />
@@ -152,6 +156,8 @@ const AddListingPage = () => {
             header="რეგიონი"
             placeholder="აირჩიე რეგიონი"
             onSelect={handleRegionSelect}
+            register={register("regionId")}
+            setValue={setValue}
           />
 
           {selectedRegion && (
@@ -159,6 +165,8 @@ const AddListingPage = () => {
               data={cities}
               header="ქალაქი"
               placeholder="აირჩიე ქალაქი"
+              register={register("cityId")}
+              setValue={setValue}
             />
           )}
         </div>
@@ -234,6 +242,8 @@ const AddListingPage = () => {
             data={agents}
             header="აირჩიე"
             placeholder="აირჩიე აგენტი"
+            register={register("agentID")}
+            setValue={setValue}
           />
         </div>
 

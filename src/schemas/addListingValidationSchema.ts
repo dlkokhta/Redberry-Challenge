@@ -27,7 +27,7 @@ const addListingValidationSchema = yup.object({
         return wordCount >= 5;
       }
     ),
-
+  regionId: yup.number().required(),
   cityId: yup.number().required(),
   postalCode: yup.string().required("Postal code is required").matches(/^\d+$/),
 

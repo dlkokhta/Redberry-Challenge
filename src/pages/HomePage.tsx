@@ -6,7 +6,7 @@ const HomePage = () => {
   console.log("isAgentWindowOpen", isAgentWindowOpen);
   return (
     <div>
-      {!isAgentWindowOpen && (
+      {isAgentWindowOpen && (
         <AddAgent setIsAgentWindowOpen={setIsAgentWindowOpen} />
       )}
     </div>

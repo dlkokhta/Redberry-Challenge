@@ -5,7 +5,9 @@ interface AddListingDropDownTypes {
   data: any;
   header: string;
   placeholder: string;
-  onSelect?: (selectedOption: any) => void; // Optional callback for when an option is selected
+  onSelect?: (selectedOption: any) => void;
+  register: any;
+  setValue: (name: any, value: any) => void;
 }
 
 const AddListingDropDown: React.FC<AddListingDropDownTypes> = ({
@@ -13,6 +15,8 @@ const AddListingDropDown: React.FC<AddListingDropDownTypes> = ({
   header,
   placeholder,
   onSelect,
+  register,
+  setValue,
 }) => {
   const [selectedOption, setSelectedOption] = useState<any>(null);
   const [options, setOptions] = useState<any[]>([]);
@@ -27,8 +31,11 @@ const AddListingDropDown: React.FC<AddListingDropDownTypes> = ({
 
   const handleSelectChange = (selectedOption: any) => {
     setSelectedOption(selectedOption);
+
+    setValue(register.name, selectedOption?.value);
+
     if (onSelect) {
-      onSelect(selectedOption); // Pass the selected option to the parent component
+      onSelect(selectedOption);
     }
   };
 
