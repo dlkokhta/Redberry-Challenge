@@ -91,7 +91,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/AddListingPage" element={<AddListingPage />} />
+        <Route path="/addListing" element={<AddListingPage />} />
       </Routes>
     </>
   );
