@@ -9,6 +9,7 @@ import { setRegion } from "./store/regionsSlice";
 import { setCities } from "./store/citiesSlice";
 import { useDispatch } from "react-redux";
 import { setAgents } from "./store/agentSlice";
+import { setRealEstates } from "./store/realEstatesSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,7 +21,6 @@ function App() {
       try {
         const response = await axios.get(`${regionsUrl}`);
         dispatch(setRegion(response.data));
-        console.log("region", response.data);
       } catch (error) {
         console.log(error);
       }
@@ -62,6 +62,27 @@ function App() {
       }
     };
     fetchAgents();
+  }, []);
+
+  const realEstatesUrl =
+    "https://api.real-estate-manager.redberryinternship.ge/api/real-estates/";
+
+  useEffect(() => {
+    const fetchRealEstates = async () => {
+      try {
+        const response = await axios.get(`${realEstatesUrl}`, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        dispatch(setRealEstates(response.data));
+        console.log("realEsttes", response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchRealEstates();
   }, []);
 
   return (
