@@ -11,6 +11,8 @@ export default {
         textBlack: " #021526",
         textGreen: " #45A849",
         textRed: " #F93B1D",
+        checkBoxGreen: " #45A849",
+        filterBarButtonGray: "#F3F3F3",
       },
 
       fontFamily: {
