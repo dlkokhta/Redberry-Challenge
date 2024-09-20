@@ -10,8 +10,8 @@ import { useState } from "react";
 
 const FilterBar = ({ setIsAgentWindowOpen }: any) => {
   const [regionMenuIsOpen, setRegionMenuIsOpen] = useState<boolean>(false);
-  const [priceCategoryIsOpen, setPriceCategoryIsOpen] =
-    useState<boolean>(false);
+  //   const [priceCategoryIsOpen, setPriceCategoryIsOpen] =
+  useState<boolean>(false);
 
   const navigate = useNavigate();
   const regions = useSelector((state: RootState) => state.region.region);
@@ -19,9 +19,9 @@ const FilterBar = ({ setIsAgentWindowOpen }: any) => {
   const regionClickHandler = () => {
     setRegionMenuIsOpen((prev) => !prev);
   };
-  const priceCategoryClickHandler = () => {
-    setPriceCategoryIsOpen((prev) => !prev);
-  };
+  //   const priceCategoryClickHandler = () => {
+  //     setPriceCategoryIsOpen((prev) => !prev);
+  //   };
 
   return (
     <div className="flex font-firaGo mt-[77px] items-center">
