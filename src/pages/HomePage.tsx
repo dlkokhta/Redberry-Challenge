@@ -1,6 +1,7 @@
 import AddAgent from "../components/AddAgent";
 import { useState } from "react";
 import RealEstates from "../components/realEstates";
+import FilterBar from "../components/FilterBar";
 
 const HomePage = () => {
   const [isAgentWindowOpen, setIsAgentWindowOpen] = useState<boolean>(false);
@@ -10,7 +11,7 @@ const HomePage = () => {
       {isAgentWindowOpen && (
         <AddAgent setIsAgentWindowOpen={setIsAgentWindowOpen} />
       )}
-
+      <FilterBar setIsAgentWindowOpen={setIsAgentWindowOpen} />
       <RealEstates />
     </div>
   );

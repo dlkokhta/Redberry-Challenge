@@ -58,7 +58,7 @@ const AddAgent = ({ setIsAgentWindowOpen }: any) => {
   };
 
   const cancelHandleClick = () => {
-    setIsAgentWindowOpen(true);
+    setIsAgentWindowOpen(false);
   };
 
   const submitCLickhandler = () => {
