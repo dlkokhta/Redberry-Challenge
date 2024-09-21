@@ -173,7 +173,7 @@ const RealEstatesDetails = () => {
           />
           <div className="flex mt-1">
             <div className="ml-auto text-[16px] text-[#808A93]">
-              გამოქვეყნების თარიღის{formattedDate}
+              გამოქვეყნების თარიღის {formattedDate}
             </div>
           </div>
         </div>
@@ -249,11 +249,9 @@ const RealEstatesDetails = () => {
             onClick={() => {
               setIdToDelete(estateDetails?.id), setDeleteSubmittionIsOpen(true);
             }}
-            className="border border-[#676E76] p-[10px] rounded-xl w-[131px] whitespace-nowrap cursor-pointer"
+            className="border border-[#676E76] p-[10px] rounded-xl w-[131px] whitespace-nowrap cursor-pointer text-[#676E76] hover:text-white hover:bg-[#676E76]"
           >
-            <div className="text-[12px] font-medium text-[#676E76]">
-              ლისტინგის წაშლა
-            </div>
+            <div className="text-[12px] font-medium ">ლისტინგის წაშლა</div>
           </div>
         </div>
       </div>
