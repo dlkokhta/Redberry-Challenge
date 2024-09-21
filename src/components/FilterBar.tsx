@@ -182,7 +182,7 @@ const FilterBar = ({ setIsAgentWindowOpen }: any) => {
                 <div className="flex justify-end mt-[32px]">
                   <button
                     type="submit"
-                    className="font-firaGo text-[14px] font-medium text-white bg-textRed py-2 px-[14px] rounded-xl "
+                    className="font-firaGo text-[14px] font-medium text-white bg-textRed hover:bg-[#DF3014]  py-2 px-[14px] rounded-xl "
                   >
                     არჩევა
                   </button>
@@ -314,7 +314,7 @@ const FilterBar = ({ setIsAgentWindowOpen }: any) => {
                   <button
                     // onClick={() => setPriceCategoryIsOpen(false)}
                     type="submit"
-                    className="font-firaGo text-[14px] font-medium text-white bg-textRed py-2 px-[14px] rounded-xl "
+                    className="font-firaGo text-[14px] font-medium text-white bg-textRed hover:bg-[#DF3014] py-2 px-[14px] rounded-xl "
                   >
                     არჩევა
                   </button>
@@ -445,7 +445,7 @@ const FilterBar = ({ setIsAgentWindowOpen }: any) => {
                 <div className="flex justify-end mt-[32px]">
                   <button
                     type="submit"
-                    className="font-firaGo text-[14px] font-medium text-white bg-textRed py-2 px-[14px] rounded-xl "
+                    className="font-firaGo text-[14px] font-medium text-white bg-textRed hover:bg-[#DF3014] py-2 px-[14px] rounded-xl "
                   >
                     არჩევა
                   </button>
@@ -490,7 +490,7 @@ const FilterBar = ({ setIsAgentWindowOpen }: any) => {
                 <div className="flex justify-end mt-[32px]">
                   <button
                     type="submit"
-                    className="font-firaGo text-[14px] font-medium text-white bg-textRed py-2 px-[14px] rounded-xl "
+                    className="font-firaGo text-[14px] font-medium text-white bg-textRed hover:bg-[#DF3014] py-2 px-[14px] rounded-xl "
                   >
                     არჩევა
                   </button>

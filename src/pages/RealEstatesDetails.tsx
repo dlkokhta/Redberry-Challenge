@@ -9,6 +9,9 @@ import iconRight from "../assets/iconRight.png";
 import { useNavigate } from "react-router-dom";
 import email from "../assets/email.png";
 import phone from "../assets/phone.png";
+import { RootState } from "../store/store.js";
+import { useSelector } from "react-redux";
+import SliderEstates from "../components/SliderEstates";
 
 interface City {
   id: number;
@@ -48,10 +51,18 @@ interface EstateDetails {
 
 const RealEstatesDetails = () => {
   const { id } = useParams();
+  const realEstate = useSelector(
+    (state: RootState) => state.realEstates.realEstates
+  );
   const [estateDetails, setEstateDetails] = useState<EstateDetails | null>(
     null
   );
-  console.log("estateDetails", estateDetails);
+
+  const regionId = estateDetails?.city.region.id;
+  const related = realEstate.filter(
+    (estate) => estate.city.region_id === regionId
+  );
+
   const navigate = useNavigate();
 
   const url = `https://api.real-estate-manager.redberryinternship.ge/api/real-estates/${id}`;
@@ -177,12 +188,18 @@ const RealEstatesDetails = () => {
               </div>
             </div>
           </div>
-          <div className="border border-[#676E76] p-[10px] rounded-xl w-[131px] whitespace-nowrap">
+          <div
+            // onClick={() => listingDeleteClickHandler(estateDetails?.id)}
+            className="border border-[#676E76] p-[10px] rounded-xl w-[131px] whitespace-nowrap cursor-pointer"
+          >
             <div className="text-[12px] font-medium text-[#676E76]">
               ლისტინგის წაშლა
             </div>
           </div>
         </div>
+      </div>
+      <div className="mt-[67px] px-[162px]">
+        <SliderEstates related={related} />
       </div>
     </div>
   );
