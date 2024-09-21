@@ -10,6 +10,7 @@ import { setCities } from "./store/citiesSlice";
 import { useDispatch } from "react-redux";
 import { setAgents } from "./store/agentSlice";
 import { setRealEstates } from "./store/realEstatesSlice";
+import RealEstatesDetails from "./pages/RealEstatesDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -77,7 +78,6 @@ function App() {
           },
         });
         dispatch(setRealEstates(response.data));
-        console.log("realEsttes", response.data);
       } catch (error) {
         console.log(error);
       }
@@ -91,7 +91,12 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/addListing" element={<AddListingPage />} />
+        <Route path="/addListing" element={<AddListingPage />} />{" "}
+        RealEstatesDetails
+        <Route
+          path="/realEstatesDetails/:id"
+          element={<RealEstatesDetails />}
+        />
       </Routes>
     </>
   );

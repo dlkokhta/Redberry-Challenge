@@ -42,8 +42,6 @@ const AddListingPage = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data: any) => {
-    console.log("errorsss!!", errors);
-    console.log("data!!", data);
     const formData = new FormData();
 
     formData.append("address", data.address);
@@ -63,13 +61,12 @@ const AddListingPage = () => {
     const token = "9cfc36ff-e2fb-41a1-95c0-55773a2ca25f";
 
     try {
-      const response = await axios.post(url, formData, {
+      await axios.post(url, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("response", response.data);
     } catch (error) {
       console.log(error);
     }

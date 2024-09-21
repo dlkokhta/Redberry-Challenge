@@ -4,11 +4,13 @@ import locationIcon from "../assets/locationIcon.png";
 import bedIcon from "../assets/bedIcon.png";
 import twoArrow from "../assets/twoArrow.png";
 import zipIcon from "../assets/zipIcon.png";
+import { useNavigate } from "react-router-dom";
 
 const realEstates = () => {
   const realEstate = useSelector(
     (state: RootState) => state.realEstates.realEstates
   );
+  const navigate = useNavigate();
 
   return (
     <div className="mt-20 grid grid-cols-4 gap-5 font-firaGo">
@@ -20,7 +22,8 @@ const realEstates = () => {
               {realEstate.is_rental === 0 ? "ქირავდება" : "იყიდება"}
             </div>
             <img
-              className="w-full h-[307px]"
+              onClick={() => navigate(`/RealEstatesDetails/${realEstate.id}`)}
+              className="w-full h-[307px] cursor-pointer"
               key={realEstate.id}
               src={realEstate.image}
               alt={realEstate.name || "Region Image"}

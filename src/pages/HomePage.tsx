@@ -5,7 +5,7 @@ import FilterBar from "../components/FilterBar";
 
 const HomePage = () => {
   const [isAgentWindowOpen, setIsAgentWindowOpen] = useState<boolean>(false);
-  console.log("isAgentWindowOpen", isAgentWindowOpen);
+
   return (
     <div className="px-[162px]">
       {isAgentWindowOpen && (
