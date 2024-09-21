@@ -51,13 +51,19 @@ interface EstateDetails {
 
 const RealEstatesDetails = () => {
   const { id } = useParams();
+
   const realEstate = useSelector(
     (state: RootState) => state.realEstates.realEstates
   );
   const [estateDetails, setEstateDetails] = useState<EstateDetails | null>(
     null
   );
+  const [deleteSubmittionIsOpen, setDeleteSubmittionIsOpen] =
+    useState<boolean>(false);
 
+  const [idToDelete, setIdToDelete] = useState<number | null | undefined>(null);
+
+  console.log("idToDelete", idToDelete);
   const regionId = estateDetails?.city.region.id;
   const related = realEstate.filter(
     (estate) => estate.city.region_id === regionId
@@ -97,10 +103,61 @@ const RealEstatesDetails = () => {
   const originalDate = estateDetails?.created_at;
   const formattedDate = formatDate(originalDate);
 
+  const url2 = `https://api.real-estate-manager.redberryinternship.ge/api/real-estates/${idToDelete}`;
+
+  const submitToDeleteClickHandler = () => {
+    const deleteEstate = async () => {
+      try {
+        await axios.delete(`${url2}`, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        navigate("/");
+        window.location.reload();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    deleteEstate();
+  };
+
   return (
     <div className="mt-[64px]  font-firaGo">
-      <div onClick={() => navigate("/")} className="pl-[162px]">
-        <img src={iconRight} className="w-8 h-8 mb-[30px]" />
+      {deleteSubmittionIsOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-75">
+          <div className=" bg-white pl-[170px] pt-[58px] pr-[170px] pb-[58px] rounded-3xl">
+            {/* <img src={xIcon} className="w-[16px] ml-auto absolute" /> */}
+            <h1 className="text-center font-firaGo text-[20px] font-normal mb-[35px] ">
+              გსურთ წაშალოთ ლისტინგი?
+            </h1>
+            <div className="flex gap-[15px]">
+              <button
+                onClick={() => {
+                  setDeleteSubmittionIsOpen(false), setIdToDelete(null);
+                }}
+                className="px-[16px] py-[12px]  border border-textRed rounded-xl text-[16px] font-firaGo text-textRed font-medium"
+              >
+                გაუქმება
+              </button>
+              <button
+                onClick={submitToDeleteClickHandler}
+                className="px-[16px] py-[12px]  border bg-textRed rounded-xl text-[16px] font-firaGo text-white font-medium"
+              >
+                დადასტურება
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="pl-[162px] ">
+        <img
+          onClick={() => navigate("/")}
+          src={iconRight}
+          className="w-8 h-8 mb-[30px] cursor-pointer"
+        />
       </div>
       <div className="flex pl-[162px] gap-[68px]">
         {/* Image */}
@@ -189,7 +246,9 @@ const RealEstatesDetails = () => {
             </div>
           </div>
           <div
-            // onClick={() => listingDeleteClickHandler(estateDetails?.id)}
+            onClick={() => {
+              setIdToDelete(estateDetails?.id), setDeleteSubmittionIsOpen(true);
+            }}
             className="border border-[#676E76] p-[10px] rounded-xl w-[131px] whitespace-nowrap cursor-pointer"
           >
             <div className="text-[12px] font-medium text-[#676E76]">
