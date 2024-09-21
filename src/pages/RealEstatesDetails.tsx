@@ -212,11 +212,11 @@ const RealEstatesDetails = () => {
             <div className="text-[24px]">{estateDetails?.zip_code}</div>
           </div>
 
-          <p className="text-[16px] text-[#021526B2] mb-[50px]">
+          <p className="text-[16px] text-[#021526B2] mb-[35px] w-[503px]">
             {estateDetails?.description}
           </p>
 
-          <div className="border pl-5 py-6 font-firaGo rounded-xl mb-[20px]">
+          <div className="border pl-5 py-6 font-firaGo rounded-xl mb-[20px] w-[503px]">
             <div className="flex gap-[14px] items-center mb-[16px]">
               <div className=" overflow-hidden w-[72px] h-[72px]  rounded-full">
                 <img

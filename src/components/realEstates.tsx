@@ -19,7 +19,7 @@ const realEstates = () => {
           {/* Image */}
           <div className="relative ">
             <div className="absolute text-white text-center text-xs left-[23px] top-[23px] bg-[#02152680] w-[90px] py-[8px] rounded-2xl font-medium tracking-wider">
-              {realEstate.is_rental === 0 ? "ქირავდება" : "იყიდება"}
+              {realEstate.is_rental === 0 ? "იყიდება" : "ქირავდება"}
             </div>
             <img
               onClick={() => navigate(`/RealEstatesDetails/${realEstate.id}`)}

@@ -73,6 +73,7 @@ const AddListingPage = () => {
 
     reset();
     navigate("/");
+    window.location.reload();
   };
 
   const cancelHandleClick = () => {};
